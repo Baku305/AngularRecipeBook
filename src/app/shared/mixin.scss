@@ -1,0 +1,10 @@
+@mixin onModalMixin {
+
+  animation : onModalIn 0.5s;
+
+  @keyframes onModalIn {
+    from {opacity: 0%;transform: translatey(10px);}
+    to {opacity: 100%;transform: translatey(0px);}
+  }
+}
+

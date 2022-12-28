@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-sm-12">
+    <form (ngSubmit)="onSubmit(f)" #f = "ngForm">
+      <div class="row">
+        <div class="col-sm-5 mb-3">
+          <label for="name">Name</label>
+          <input
+          type="text"
+          id="name"
+          class="form-control"
+          #nameInput
+          name="name"
+          ngModel
+          required />
+        </div>
+        <div class="col-sm-2 mb-3">
+          <label for="amount">Amount</label>
+          <input
+          type="number"
+          id="amount"
+          class="form-control"
+          #amountInput
+          ngModel
+          name="amount"
+          required
+          [pattern]="'^[0-9]+[0-9]*$'"/>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <button
+              type="submit"
+              class="btn btn-success"
+              [disabled]="!f.valid"
+            >
+              {{editMode ? 'Update' : 'Add'}}
+            </button>
+            <button type="button" class="btn btn-danger" (click)="onDelete()" *ngIf="editMode">Delete</button>
+            <button type="button" class="btn btn-primary" (click)="onClear()">Clear</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div *ngIf="modalError" class="modall rounded bg-light">
+  <div>ERRORE NELL'INSERIMENTO DELL'INGREDIENTE</div>
+  <div
+    class="btn btn-close position-absolute top-0 end-0 mt-1 me-1"
+    (click)="modalError = false"
+  ></div>
+</div>

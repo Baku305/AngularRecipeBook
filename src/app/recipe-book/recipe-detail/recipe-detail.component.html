@@ -1,0 +1,75 @@
+<div class="row" [ngClass]="animation" (animationend)="animation = ''">
+  <div class="col-sm-12">
+    <img
+      [src]="recipe.imgPath"
+      alt="{{ recipe.imgPath }}"
+      class="img-fluid"
+      style="max-height: 300px"
+    />
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <h1>{{ recipe.name }}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="btn-group position-relative">
+      <button
+        appDropDown
+        class="btn btn-primary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Manage Recipe
+      </button>
+      <ul
+        class="dropdown-menu position-absolute top-100"
+        aria-labelledby="dropdownMenuButton"
+      >
+        <li>
+          <a
+            class="dropdown-item"
+            (click)="addIngredientOnShoppingList(recipe.ingredients)"
+            [ngStyle]="{ cursor: 'pointer' }"
+            >Add Ingredients to Shopping List</a
+          >
+        </li>
+        <li>
+          <a
+            class="dropdown-item"
+            (click)="onEditRecipe()"
+            [ngStyle]="{ cursor: 'pointer' }"
+            >Edit Recipe</a
+          >
+        </li>
+        <li>
+          <a
+            class="dropdown-item"
+            (click)="onDeleteRecipe()"
+            [ngStyle]="{ cursor: 'pointer' }"
+            >Delete Recipe</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    {{ recipe.description }}
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">
+        {{ ingredient.name }} - {{ ingredient.amount }}
+      </li>
+    </ul>
+  </div>
+</div>
