@@ -9,22 +9,24 @@ import { Recipe } from './recipe.model';
 export class RecipeServiceService implements OnInit {
   constructor() {}
 
-  recipesChanged = new Subject<Recipe[]>()
+  recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'Milk',
-      'milk',
-      'https://staticfanpage.akamaized.net/wp-content/uploads/sites/21/2022/05/primi-piatti-pesce-ricette-1200x675.jpg',
-      [new Ingredient('milk', 1)]
-    ),
-    new Recipe(
-      'Bread',
-      'bread',
-      'https://staticfanpage.akamaized.net/wp-content/uploads/sites/21/2022/05/primi-piatti-pesce-ricette-1200x675.jpg',
-      [new Ingredient('farina', 10), new Ingredient('acqua', 1)]
-    ),
-  ];
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Milk',
+  //     'milk',
+  //     'https://staticfanpage.akamaized.net/wp-content/uploads/sites/21/2022/05/primi-piatti-pesce-ricette-1200x675.jpg',
+  //     [new Ingredient('milk', 1)]
+  //   ),
+  //   new Recipe(
+  //     'Bread',
+  //     'bread',
+  //     'https://staticfanpage.akamaized.net/wp-content/uploads/sites/21/2022/05/primi-piatti-pesce-ricette-1200x675.jpg',
+  //     [new Ingredient('farina', 10), new Ingredient('acqua', 1)]
+  //   ),
+  // ];
+
+  private recipes: Recipe[] = [];
 
   ngOnInit() {}
 
@@ -32,22 +34,27 @@ export class RecipeServiceService implements OnInit {
     return this.recipes.slice();
   }
 
-  getRecipesById(id:number){
-    return this.recipes.slice()[id]
+  getRecipesById(id: number) {
+    return this.recipes.slice()[id];
   }
 
-  updateRecipe(id: number , recipe : Recipe){
-    this.recipes[id] = recipe
-    this.recipesChanged.next(this.recipes.slice())
+  updateRecipe(id: number, recipe: Recipe) {
+    this.recipes[id] = recipe;
+    this.recipesChanged.next(this.recipes.slice());
   }
 
-  addRecipe(recipe : Recipe){
+  addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
-    this.recipesChanged.next(this.recipes.slice())
+    this.recipesChanged.next(this.recipes.slice());
   }
 
-  deleteRecipe(id:number){
-    this.recipes.splice(id,1);
-    this.recipesChanged.next(this.recipes.slice())
+  deleteRecipe(id: number) {
+    this.recipes.splice(id, 1);
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
   }
 }

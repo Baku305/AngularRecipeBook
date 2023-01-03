@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ModalService } from 'src/app/modal.service';
 import { RecipeServiceService } from '../recipe-service.service';
 import { Recipe } from '../recipe.model';
 
@@ -18,11 +19,13 @@ import { Recipe } from '../recipe.model';
 export class RecipeListComponent implements OnInit, OnDestroy {
   recipes!: Recipe[];
   recipeSubscribe!: Subscription;
+  modalSub!: Subscription;
 
   constructor(
     private recepieService: RecipeServiceService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalService: ModalService
   ) {}
 
   ngOnInit() {
@@ -42,5 +45,10 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   onAddNewRecipe() {
     this.router.navigate(['new'], { relativeTo: this.route });
+  }
+
+  modalOn() {
+    this.modalService.onModalError.next(true);
+    this.modalService.onModalmessage.next('test');
   }
 }

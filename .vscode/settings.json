@@ -1,4 +1,6 @@
 {
     "html-to-css-autocompletion.autocompletionFilesScope": "linked-files",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.fontFamily": "'Cascadia Code ExtraLight', Consolas, 'Courier New', monospace",
+    "editor.fontSize": 14
 }

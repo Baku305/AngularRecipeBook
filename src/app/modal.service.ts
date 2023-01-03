@@ -1,11 +1,12 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ModalService {
+  onModalError = new BehaviorSubject<boolean>(false);
 
-  @Output() onModalError = new EventEmitter<boolean>()
-
-  constructor() { }
+  onModalmessage = new BehaviorSubject<string>('');
+  constructor() {}
 }

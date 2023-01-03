@@ -12,11 +12,15 @@ import { RecipeItemComponent } from './recipe-book/recipe-list/recipe-item/recip
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropDownDirectiveDirective } from './shared/drop-down-directive.directive';
-import { ShoppingListServiceService } from './shopping-list/shopping-list-service.service';
 import { ModalDirectiveDirective } from './shared/modal-directive.directive';
 import { RecipeEditComponent } from './recipe-book/recipe-edit/recipe-edit.component';
 import { RecipeStartComponent } from './recipe-book/recipe-start/recipe-start.component';
 import { RecipeServiceService } from './recipe-book/recipe-service.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loadingSpinner/loading-spinner/loading-spinner.component';
+import { AuthIntercetterService } from './auth/auth-intercetter.service';
+import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -31,15 +35,26 @@ import { RecipeServiceService } from './recipe-book/recipe-service.service';
     DropDownDirectiveDirective,
     ModalDirectiveDirective,
     RecipeEditComponent,
-    RecipeStartComponent
+    RecipeStartComponent,
+    AuthComponent,
+    LoadingSpinnerComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [RecipeServiceService],
-  bootstrap: [AppComponent]
+  providers: [
+    RecipeServiceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthIntercetterService,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

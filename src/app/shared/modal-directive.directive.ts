@@ -1,17 +1,28 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ViewContainerRef,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ModalService } from '../modal.service';
 import { ShoppingListServiceService } from '../shopping-list/shopping-list-service.service';
 
 @Directive({
-  selector: '[appModalDirective]'
+  selector: '[appModalDirective]',
 })
 export class ModalDirectiveDirective {
+  constructor(
+    public elRef: ElementRef,
+    private modalService: ModalService,
+    public viewContainerRef: ViewContainerRef
+  ) {}
 
-  constructor(private elRef : ElementRef) { }
-
-  @HostListener('document:click',['$event']) modalOff(event:Event): void{
-    this.elRef.nativeElement.contains(event.target) ? null :
-    //ModalService.onModalError.emit(false)
-    null
+  @HostListener('document:click', ['$event']) modalOff(event: Event): void {
+    this.elRef.nativeElement.contains(event.target)
+      ? null
+      : this.modalService.onModalError.next(false);
   }
 }
